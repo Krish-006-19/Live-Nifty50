@@ -1,8 +1,11 @@
 const express = require("express");
+const cors = require("cors");           // <-- import CORS
 const yahooFinance = require("yahoo-finance2").default;
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());                         // <-- add this line
 
 const STOCK_LIST = [
   "RELIANCE.NS", "INFY.NS", "TCS.NS", "HDFCBANK.NS", "ICICIBANK.NS", "KOTAKBANK.NS",
@@ -16,8 +19,6 @@ const STOCK_LIST = [
   "BEL.NS", "JIOFIN.NS", "ONGC.NS", "DIVISLAB.NS", "INDUSINDBK.NS", "ADANIGREEN.NS",
   "HAVELLS.NS", "TATACONSUM.NS"
 ];
-
-
 
 async function fetchStock(symbol) {
   try {
@@ -49,5 +50,5 @@ app.get("/stocks", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
