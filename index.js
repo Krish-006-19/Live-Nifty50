@@ -49,6 +49,25 @@ app.get("/stocks", async (req, res) => {
   }
 });
 
+app.get('/stocks/:symbol', async (req, res) => {
+  try {
+    const symbol = req.params.symbol;
+
+    if (!symbol) return res.status(404).json({ error: 'Symbol not found' });
+
+    const stockObj = await fetchStock(symbol);
+
+    if (stockObj.error) {
+      return res.status(404).json({ error: `Failed to fetch data for ${symbol}` });
+    }
+
+    return res.json(stockObj);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
 });
