@@ -25,19 +25,21 @@ async function fetchStock(symbol) {
     const quote = await yahooFinance.quote(symbol);
     return {
       symbol,
-      ltp: quote.regularMarketPrice,
-      change: quote.regularMarketChange,
-      percentChange: quote.regularMarketChangePercent,
-      open: quote.regularMarketOpen,
-      high: quote.regularMarketDayHigh,
-      low: quote.regularMarketDayLow,
-      prevClose: quote.regularMarketPreviousClose
+      ltp: quote.regularMarketPrice,         
+      change: quote.regularMarketChange,      
+      percentChange: quote.regularMarketChangePercent, 
+      open: quote.regularMarketOpen,          
+      high: quote.regularMarketDayHigh,      
+      low: quote.regularMarketDayLow,         
+      prevClose: quote.regularMarketPreviousClose, 
+      marketCap: quote.marketCap              
     };
   } catch (err) {
     console.error(`Error fetching ${symbol}:`, err.message);
     return { symbol, error: "Failed to fetch" };
   }
 }
+
 
 app.get("/stocks", async (req, res) => {
   try {
