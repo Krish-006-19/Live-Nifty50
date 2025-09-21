@@ -1,11 +1,11 @@
 const express = require("express");
-const cors = require("cors");           // <-- import CORS
+const cors = require("cors");       
 const yahooFinance = require("yahoo-finance2").default;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());                         // <-- add this line
+app.use(cors());                       
 
 const STOCK_LIST = [
   "RELIANCE.NS", "INFY.NS", "TCS.NS", "HDFCBANK.NS", "ICICIBANK.NS", "KOTAKBANK.NS",
